@@ -1,4 +1,19 @@
 // (A) INITIALIZE
+
+/*
+// Spawn Debugging
+(function() {
+  var childProcess = require("child_process");
+  var oldSpawn = childProcess.spawn;
+  function mySpawn() {
+      console.log('spawn called');
+      console.log(arguments);
+      var result = oldSpawn.apply(this, arguments);
+      return result;
+  }
+  childProcess.spawn = mySpawn;
+})();
+*/
 // (A1) LOAD REQUIRED MODULES
 // npm i bcryptjs express body-parser cookie-parser multer jsonwebtoken
 const bcrypt = require("bcryptjs"),
@@ -8,7 +23,7 @@ const bcrypt = require("bcryptjs"),
   cookieParser = require("cookie-parser"),
   multer = require("multer"),
   jwt = require("jsonwebtoken"),
-  Tx = require("./ttsTx-engine");
+  TTS = require("./ttsTx-engine");
 
 
 // (A2) EXPRESS + MIDDLEWARE
@@ -16,8 +31,6 @@ const app = express();
 app.use(multer().array());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-
-
 
 // (B) USER ACCOUNTS - AT LEAST ENCRYPT YOUR PASSWORDS!
 // bcrypt.hash("PASSWORD", 8, (err, hash) => { console.log(hash); });
@@ -119,3 +132,9 @@ app.post("/out", (req, res) => {
 
 // (E) GO!
 app.listen(7878);
+console.log("Server running on port 7878 of servier IP address");
+
+
+// TTS Tx ENGINE TASKS
+
+TTS.Tx('Guys, we have an urgent problem with the macerator. Please investigate and message the group');
