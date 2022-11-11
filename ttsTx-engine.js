@@ -7,42 +7,48 @@ const SeeedStudioRelayBoard = require('js-seeed-studio-relay-board');
 
 
 module.exports = {
-    Tx: function (TextToSpeak) {
+    Tx: function (TextToSpeak, Type) {
 
-        sendTransmission(TextToSpeak)
-      
+        if (Type == "custom") {
+            sendCustomTransmission(TextToSpeak)
+        };
+
+        if (Type == "canned"){
+            // play pre-synthesized mp3 from drop down selection
+
+        }
+
+
     },
 
 }
 
 
-async function sendTransmission(TextToSpeak) {
+
+
+// PTT custom transmission from TTS engine "Say"
+async function sendCustomTransmission(TextToSpeak) {
     const rpi = new SeeedStudioRelayBoard.Relay();
- 
+
     // Initialize I2C controler
     await rpi.init();
- 
+
     // Trigger PTT on Relay 1
     await rpi.on(1);
 
     // Small Delay to allow for latency on PTT
     var TxDelay = 1200; //1.2 second
 
-    setTimeout(function() {
-      // Tx typed message
-    say.speak(TextToSpeak,'voice_kal_diphone', 1.0, (err) => {
-        if (err) {
-            return console.error(err)
-        }
-    
-        console.log('Your message has been transmitted')
-         // Switch off PTT relay
-    rpi.off(1);
-    });
+    setTimeout(function () {
+        // Tx typed message
+        say.speak(TextToSpeak, 'voice_kal_diphone', 1.0, (err) => {
+            if (err) {
+                return console.error(err)
+            }
+
+            console.log('Your message has been transmitted')
+            // Switch off PTT relay
+            rpi.off(1);
+        });
     }, TxDelay);
-    
-    
-
-   
-
-}        
+};        

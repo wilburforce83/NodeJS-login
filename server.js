@@ -84,12 +84,11 @@ jwtVerify = (cookies) => {
 // (D1) STATIC ASSETS
 app.use("/assets", express.static(path.join(__dirname, "assets")))
 
-// (D2) HOME PAGE - OPEN TO ALL
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "/login.html"));
 });
 
-// (D3) ADMIN PAGE - REGISTERED USERS ONLY
+// (D3) APP PAGE - REGISTERED USERS ONLY
 app.get("/admin", (req, res) => {
   if (jwtVerify(req.cookies)) {
     res.sendFile(path.join(__dirname, "/app.html"));
