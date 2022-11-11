@@ -19,11 +19,13 @@
 const bcrypt = require("bcryptjs"),
   path = require("path"),
   express = require("express"),
-  bodyParser = require("body-parser"),
+    bodyParser = require("body-parser"),
   cookieParser = require("cookie-parser"),
   multer = require("multer"),
   jwt = require("jsonwebtoken"),
   TTS = require("./ttsTx-engine");
+  var fs = require("fs");
+var https = require("https");
 
 
 // (A2) EXPRESS + MIDDLEWARE
@@ -33,9 +35,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // (B) USER ACCOUNTS - AT LEAST ENCRYPT YOUR PASSWORDS!
-// bcrypt.hash("PASSWORD", 8, (err, hash) => { console.log(hash); });
+//bcrypt.hash("KentW2V", 8, (err, hash) => { console.log(hash); });
 const users = {
-  "jon@doe.com": "$2a$08$g0ZKZhiA97.pyda3bsdQx.cES.TLQxxKmbvnFShkhpFeLJTc6DuA6"
+  "kent@green-create.com": "$2a$08$I1IxxGScFaKYefjeMvXDoOUJXeFdtSXPPKzwTYn3n5zvolT1/oMqi"
 };
 
 // (C) JSON WEB TOKEN
@@ -89,7 +91,7 @@ app.get("/", (req, res) => {
 });
 
 // (D3) APP PAGE - REGISTERED USERS ONLY
-app.get("/admin", (req, res) => {
+app.get("/tx", (req, res) => {
   if (jwtVerify(req.cookies)) {
     res.sendFile(path.join(__dirname, "/app.html"));
   } else {
@@ -100,7 +102,7 @@ app.get("/admin", (req, res) => {
 // (D4) LOGIN PAGE
 app.get("/login", (req, res) => {
   if (jwtVerify(req.cookies)) {
-    res.redirect("../admin");
+    res.redirect("../tx");
   } else {
     res.sendFile(path.join(__dirname, "/login.html"));
   }
@@ -130,9 +132,24 @@ app.post("/out", (req, res) => {
 });
 
 // (E) GO!
-app.listen(7878);
-console.log("Server running on port 7878 of servier IP address");
+https
+  .createServer(
+    {
+      key: fs.readFileSync("server.key"),
+      cert: fs.readFileSync("server.cert"),
+    },
+    app
+  )
+  .listen(7878, function () {
+    console.log(
+      "Example app listening on port 7878! Go to https://localhost:7878/"
+    );
+  });
 
+/*
+  app.listen(7878);
+console.log("Server running on port 7878 of servier IP address");
+*/
 
 // TTS Tx ENGINE TASKS
 

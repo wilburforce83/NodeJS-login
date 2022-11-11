@@ -1,26 +1,39 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Admin Page</title>
-    <link rel="stylesheet" href="assets/attriCSS.css"/>
-    <script src="assets/app.js"></script>
-  </head>
-  <body>
-    <h1>It Works!</h1>
-    <p>This page can only be accessed by admin.</p>
-    <div id="audio">
-      <p>
-        <button id=startRecord onclick="startRecording()">Record</button>
-        <button id=stopRecord onclick="stopRecording()">Stop</button>
-      </p>
-      <p>
-        <audio id=recordedAudio></audio>
-      </p>
-      <p>
-        <a id=audioDownload></a>
-      </p>
-    </div>
-    
-  </body>
- 
+
+<head>
+  <title>Green Create WebTx</title>
+  <link rel="stylesheet" href="assets/classless.css" />
+  <script src="assets/app.js"></script>
+</head>
+
+<body>
+
+
+  <div class="card hint">
+    <h1>Kent WebTx</h1>
+    <p>Send voice messages, or TTS text messages directly to PMR 446 site radios</p>
+  </div>
+  <div id="audio">
+
+    <button id=startRecord onclick="startRecording()">Record</button>
+    <button id=stopRecord onclick="stopRecording()">Stop</button>
+    <p>
+      <audio id=recordedAudio></audio>
+    </p>
+
+    <button style="display:none;" id=audioDownload></button>
+
+  </div>
+  <div class="card info">
+    <p>Text to Speech Transmission</p>
+    <textarea id="textTx" name="transmission-text" rows="4" cols="50">
+        Your message here....
+        </textarea>
+    <button id=tts-message onclick="startRecording()">Transmit Text</button>
+  </div>
+
+
+</body>
+
 </html>

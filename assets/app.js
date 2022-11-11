@@ -13,7 +13,8 @@ navigator.mediaDevices.getUserMedia({
         recordedAudio.controls = true;
         audioDownload.href = recordedAudio.src;
         audioDownload.download = 'audio.mp3';
-        audioDownload.innerHTML = 'Download';
+        audioDownload.innerHTML = 'Tx to Site';
+        audioDownload.style.display = "";
         submit(blob);
       }
     }
@@ -25,6 +26,7 @@ navigator.mediaDevices.getUserMedia({
 // The POST request has to be done without AJAX.
 
 function startRecording() {
+  audioDownload.style.display = "none";
   startRecord.disabled = true;
   stopRecord.disabled = false;
   audio = [];
@@ -59,4 +61,12 @@ function submit(blob) {
       console.log(data);
     });
   }
+}
+
+function ttsMessageSubmit() {
+
+  //collect text from id tts-message and post to server.js
+  let message = tts-message.innerHTML
+  console.log(message);
+
 }

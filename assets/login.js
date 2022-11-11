@@ -6,7 +6,7 @@ function login () {
   fetch("/in", { method:"POST", body:data })
   .then((res) => { return res.text(); })
   .then((txt) => {
-    if (txt=="OK") { location.href = "../admin"; }
+    if (txt=="OK") { location.href = "../tx"; }
     else { alert(txt); }
   })
   .catch((err) => {
