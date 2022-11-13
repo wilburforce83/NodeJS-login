@@ -7,21 +7,12 @@ const SeeedStudioRelayBoard = require('js-seeed-studio-relay-board');
 
 
 module.exports = {
-    Tx: function (TextToSpeak, Type) {
+    Txtts: function (TextToSpeak, Type) {
 
-        if (Type == "custom") {
-            sendCustomTransmission(TextToSpeak)
-        };
-
-        if (Type == "canned"){
-            // play pre-synthesized mp3 from drop down selection
-
-        }
-
-
-    },
-
-}
+    sendCustomTransmission(TextToSpeak);
+   
+    } 
+};
 
 
 
@@ -45,10 +36,11 @@ async function sendCustomTransmission(TextToSpeak) {
             if (err) {
                 return console.error(err)
             }
-
-            console.log('Your message has been transmitted')
+            let notification = "Tx sent: "+TextToSpeak;
+            console.log(notification)
             // Switch off PTT relay
             rpi.off(1);
         });
     }, TxDelay);
+
 };        

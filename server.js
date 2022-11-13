@@ -93,7 +93,7 @@ app.get("/", (req, res) => {
 // (D3) APP PAGE - REGISTERED USERS ONLY
 app.get("/tx", (req, res) => {
   if (jwtVerify(req.cookies)) {
-    res.sendFile(path.join(__dirname, "/app.html"));
+    res.sendFile(path.join(__dirname, "/index.html"));
   } else {
     res.redirect("../login");
   }
@@ -146,11 +146,23 @@ https
     );
   });
 
+
 /*
-  app.listen(7878);
-console.log("Server running on port 7878 of servier IP address");
+
+**************************************
+**************************************
+
+
+TEXT AND AUDIO COLLECTION FUNCTIONS
+
+
+**************************************
+**************************************
 */
+app.post('/tx', function(req, res) {
+  var tts = req.body.tts;
+  res.send();
+  console.log(tts);
+  TTS.Txtts(tts,"tts")
+})
 
-// TTS Tx ENGINE TASKS
-
-TTS.Tx('Guys, we have an urgent problem with the macerator. Please investigate and message the group');

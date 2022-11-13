@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Green Create WebTx</title>
+  <link rel="stylesheet" href="assets/classless.css" />
+  <script src="assets/index.js"></script>
+</head>
+
+<body>
+
+
+  <div class="card hint">
+    <h1>Kent WebTx</h1>
+    <p>Send voice messages, or TTS text messages directly to PMR 446 site radios</p>
+  </div>
+
+  <div class="card info">
+    <p>Record Voice Transmission</p>
+    <div id="audio">
+
+      <button id=startRecord onclick="startRecording()">Record</button>
+      <button id=stopRecord onclick="stopRecording()">Stop</button>
+      <button style="display:none;" id=audioDownload></button>
+      <p>
+        <audio id=recordedAudio></audio>
+      </p>
+  
+      
+  
+    </div>
+ </div>
+
+ <div class="card info"> 
+    <p>Text to Speech Transmission</p>
+   
+    <form id="ttsform"action="tx" target="dummyframe" method="POST">
+      <textarea id="tts" class="number-area" name="tts" rows="4" cols="80"></textarea>
+      <button id="ttssubmit" type="submit" >Send Transmission</button>
+  </form>
+ </div>
+ 
+ <div class="card hint">
+  <p>Tx Log</p>
+  <div id="notify" name="notify" style="height:120px;width:100%;overflow:auto;">
+    <span id="notifyme" name="notifyme"></span>
+  </div>
+ </div>
+ 
+ 
+
+
+ <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
+
+</body>
+
+</html>
+
