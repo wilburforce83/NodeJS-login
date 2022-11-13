@@ -66,7 +66,7 @@ function submit(blob) {
 function ttsMessageSubmit() {
 
   //collect text from id tts-message and post to server.js
-  let message = tts-message.innerHTML
+  let message = ttsmessage.innerHTML
   console.log(message);
 
 }
